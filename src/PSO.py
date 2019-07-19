@@ -2,7 +2,25 @@ from time import time
 import numpy as np
 
 
-class Particle:
+class Particle(object):
+    '''  Represents a single particle in a swarm
+
+    Parameters
+    ------------
+    pso : PSO
+        Swarm
+    position : nd-array
+        Position in the swarm
+
+    Attributes
+    ------------
+    v : float
+        velocity of a particle
+    p : nd-array
+        best local position
+    pmin : float
+        value at the best position
+    '''
 
     def __init__(self, pso, position=None):
         if position is None:
@@ -10,19 +28,23 @@ class Particle:
         else:
             self.position = position
         self.v = 0
-        self.p = self.position.copy()  # najbolja lokalna pozicija
+        self.p = self.position.copy()
         self.pmin = np.inf
         self.pso = pso
         self.evaluate()
 
     def move(self):
+        ''' Update velocity and move particle in ndimensional space '''
         rp = np.random.rand()  # kognitivna komponenta (0,1)
         rg = np.random.rand()  # kognitivna komponenta (0,1)
+        #update velocity
         self.v = self.pso.omega * self.v + self.pso.cp * rp * (self.p - self.position) + self.pso.cg * rg * (
                 self.pso.g - self.position)  # ubrzanje
+        #update particle position
         self.position += self.v
 
     def evaluate(self):
+        ''' Calculate value at current position '''
         fp = self.pso.criterion(self.position)
         if fp < self.pmin:
             self.p[:] = self.position
@@ -32,7 +54,38 @@ class Particle:
             self.pso.min_value = self.pmin
 
 
-class PSO:
+class PSO(object):
+    '''
+
+    Parameters
+    ------------
+    criterion : function
+        function which optimum we want computed
+    num_dimensions : int
+        number of dimensions of PSO search space
+    num_particles : int
+        number of particles in a swarm
+    max_iter : int
+        maximum number of iteration of the PSO algorithm
+    omega_min, omega_max : float
+        inertia factor
+    cp1,cp2 : float
+        cognitive factor
+    cg1, cg2 : float
+        social factor
+    const : bool
+        if factor change during execution or not
+
+
+    Attributes
+    ------------
+    g : nd-array
+        best global position of a particle at any time during execution
+    min_value : float
+        value at position g
+    particles : list
+        list of all particles in a swarm
+    '''
 
     def __init__(self, criterion, num_dimensions=3, num_particles=60, max_iter=100, omega_max=0.9,
                  omega_min=0.4, cp1=2.5, cp2=0.5, cg1=0.5, cg2=2.5, const=False, display=False,
@@ -71,27 +124,30 @@ class PSO:
 
         self.display = display
 
-    def display_info(self, iter_no, time_start):
+
+    def display_info(self, iter_no):
         if self.display:
             print("Iteration> ", iter_no, " f(g)> ", self.min_value, "w=", self.omega, "cp=", self.cp, "cg=", self.cg)
-            # print("t-iter=", time() - time_start)
+
 
     def populace_init(self):
+        ''' Generate particles '''
         for array in self.init_positions:
             p = Particle(self, array)
             self.particles.append(p)
         for i in range(self.num_particles - len(self.init_positions)):
             self.particles.append(Particle(self))
 
+
     def optimize(self):
-        # iteracije algoritma
+        ''' Find the optimum'''
+
         if self.display:
             print("Start", "f(g)> ", self.min_value, " particles=", len(self.particles),
                   " iters= ", self.max_iter)
 
         for i in range(self.max_iter + 1):
-            t1 = time()
-            # iteracije pomeranja svake cestice
+            # move each particle
             for particle in self.particles:
                 particle.move()
                 particle.evaluate()
@@ -99,6 +155,6 @@ class PSO:
             self.cp = (self.cp1 - self.cp2) * ((self.max_iter - i) / self.max_iter) + self.cp2
             self.cg = (self.cg1 - self.cg2) * ((self.max_iter - i) / self.max_iter) + self.cg2
 
-            self.display_info(i, t1)
+            self.display_info(i)
 
         return self.g, self.min_value
