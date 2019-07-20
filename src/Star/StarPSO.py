@@ -1,45 +1,5 @@
-from src.PSO import *
-
-
-class StarParticle(Particle):
-    ''' Particle in a Star PSO
-
-    Parameters
-    ------------
-    pso : PSO
-        Swarm
-
-    Attributes
-    ------------
-    v : float
-        velocity of a particle
-    position : nd-array
-        best local position
-    pmin : float
-        value at the best position
-    '''
-
-    def __init__(self, pso):
-        super().__init__(pso)
-
-    def move(self):
-        ''' moves all particles but the central one'''
-        rp = np.random.rand()  # kognitivna komponenta (0,1)
-        rg = np.random.rand()  # socijalna komponenta (0,1)
-
-        self.v = self.pso.omega * self.v + self.pso.cp * rp * (self.p - self.position) + self.pso.cg * rg * (
-                self.pso.center.position - self.position)
-        self.position += self.v
-
-    def move_center(self):
-        '''moves the central particle according to the global minimum particle'''
-        rp = np.random.rand()  # kognitivna komponenta (0,1)
-        rg = np.random.rand()  # socijalna komponenta (0,1)
-
-        self.v = self.pso.omega * self.v + self.pso.cp * rp * (self.p - self.position) + self.pso.cg * rg * (
-                self.pso.g - self.position)  # ubrzanje
-        self.position += self.v
-
+from Regular.PSO import PSO
+from Star.StarParticle import StarParticle
 
 class StarPSO(PSO):
     ''' PSO where one central node influences and is influenced

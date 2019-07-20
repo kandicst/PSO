@@ -1,44 +1,5 @@
-from src.PSO import *
-
-
-class RingParticle(Particle):
-    ''' Particle in a Ring PSO
-
-    Parameters
-    ------------
-    pso : PSO
-        Swarm
-    left : RingParticle
-        left neighbour particle
-    right : RingParticle
-        right neighbour particle
-
-    Attributes
-    ------------
-    v : float
-        velocity of a particle
-    position : nd-array
-        best local position
-    pmin : float
-        value at the best position
-
-    '''
-    def __init__(self, pso, left=None, right=None):
-        super().__init__(pso)
-        self.left = left
-        self.right = right
-
-    def move(self):
-        ''' Move a particle in a swarm space'''
-        rp = np.random.rand()
-        rg = np.random.rand()
-        if self.left.pmin < self.right.pmin:
-            g = self.left.p
-        else:
-            g = self.right.p
-        self.v = self.pso.omega * self.v + self.pso.cp * rp * (self.p - self.position) + self.pso.cg * rg * (
-                g - self.position)  # ubrzanje
-        self.position += self.v
+from Regular.PSO import PSO
+from Ring.RingParticle import RingParticle
 
 
 class RingPSO(PSO):

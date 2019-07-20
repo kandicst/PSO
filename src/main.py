@@ -1,6 +1,8 @@
 from src.ann_criterion import optimality_criterion
-from src.RingPSO import *
-from src.StarPSO import *
+from time import time
+from src.Star.StarPSO import StarPSO
+from src.Ring.RingPSO import RingPSO
+from src.Regular.PSO import PSO
 
 
 def main():
