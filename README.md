@@ -12,7 +12,7 @@ Implementing different topologies of a population based algorithm that finds the
 
 
 ## Example of use
-Let's say that we wan to find the optimum of a Rosenbrock function
+Let's say that we want to find the optimum of a Rosenbrock function
 ```python
 def rosenbrock(X):  
     y = X[1]  
