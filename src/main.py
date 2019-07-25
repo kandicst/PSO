@@ -12,7 +12,7 @@ def rosenbrock(X):
     return a*a + b*b*100.
 
 if __name__ == '__main__':
-    #main()
+
     p = PSO(rosenbrock, num_dimensions=2, num_particles=100, max_iter=100)
     position, value = p.optimize()
-    print('Optimum position: '+str(position) + '\nOptimum value: '+ str(value))
+    print('Optimum position: '+ str(position) + '\nOptimum value: '+ str(value))

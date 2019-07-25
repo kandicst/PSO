@@ -26,7 +26,7 @@ class PSO(object):
 
     Attributes
     ------------
-    g : nd-array
+    g : numpy-array
         best global position of a particle at any time during execution
     min_value : float
         value at position g
@@ -87,8 +87,15 @@ class PSO(object):
 
 
     def optimize(self):
-        ''' Find the optimum'''
+        ''' Finds the optimum of the PSO function
 
+        Returns
+        ------------
+        g : numpy-array
+            one-dimensional array that contains the position of the best particle
+        min_value : float
+            value at the best position
+        '''
         if self.display:
             print("Start", "f(g)> ", self.min_value, " particles=", len(self.particles),
                   " iters= ", self.max_iter)

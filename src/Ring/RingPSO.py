@@ -40,7 +40,7 @@ class RingPSO(PSO):
                          omega_max, omega_min, cp1, cp2, cg1, cg2,const, display)
 
     def populace_init(self):
-        ''' Generate all particles'''
+        ''' Generates all particles'''
         first = RingParticle(self)
         self.particles.append(first)
         for i in range(1, self.num_particles):
