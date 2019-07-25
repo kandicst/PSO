@@ -15,11 +15,13 @@ class PSO(object):
     max_iter : int
         maximum number of iteration of the PSO algorithm
     omega_min, omega_max : float
-        inertia factor
+        bound for values of inertia factor
     cp1,cp2 : float
-        cognitive factor
+        bound for values of cognitive factor
     cg1, cg2 : float
-        social factor
+        bound for values of social factor
+    lower, upper_bound : float
+        bounds for particle position values in swarm
     const : bool
         if factor change during execution or not
 
@@ -36,18 +38,17 @@ class PSO(object):
 
     def __init__(self, criterion, num_dimensions=3, num_particles=60, max_iter=100, omega_max=0.9,
                  omega_min=0.4, cp1=2.5, cp2=0.5, cg1=0.5, cg2=2.5, const=False, display=False,
-                 init_positions=None):
+                 lower_bound=-10, upper_bound=10):
 
         self.criterion = criterion
         self.num_dimensions = num_dimensions
         self.num_particles = num_particles
-        if init_positions is None:
-            self.init_positions = []
-        else:
-            self.init_positions = init_positions
-        self.g = np.array(np.random.uniform(-5, 5, num_dimensions))
+        self.lower_bound = lower_bound
+        self.upper_bound = upper_bound
 
+        self.g = np.array(np.random.uniform(-5, 5, num_dimensions))
         self.min_value = criterion(self.g)
+
         self.particles = []
         self.max_iter = max_iter
         self.populace_init()
@@ -78,12 +79,9 @@ class PSO(object):
 
 
     def populace_init(self):
-        ''' Generate particles '''
-        for array in self.init_positions:
-            p = Particle(self, array)
-            self.particles.append(p)
-        for i in range(self.num_particles - len(self.init_positions)):
-            self.particles.append(Particle(self))
+        ''' Generates particles '''
+        for i in range(self.num_particles):
+            self.particles.append(Particle(self, lower_bound=self.lower_bound, upper_bound=self.upper_bound))
 
 
     def optimize(self):

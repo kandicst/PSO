@@ -20,9 +20,9 @@ class Particle(object):
         value at the best position
     '''
 
-    def __init__(self, pso, position=None):
+    def __init__(self, pso,lower_bound, upper_bound, position=None):
         if position is None:
-            self.position = np.array(np.random.uniform(-5, 5, pso.num_dimensions))  # brzina cestice
+            self.position = np.array(np.random.uniform(lower_bound, upper_bound, pso.num_dimensions))
         else:
             self.position = position
         self.v = 0

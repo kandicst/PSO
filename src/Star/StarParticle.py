@@ -18,8 +18,8 @@ class StarParticle(Particle):
         value at the best position
     '''
 
-    def __init__(self, pso):
-        super().__init__(pso)
+    def __init__(self, pso, lower_bound, upper_bound):
+        super().__init__(pso, lower_bound=lower_bound, upper_bound=upper_bound)
 
     def move(self):
         ''' moves all particles but the central one'''

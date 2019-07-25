@@ -22,8 +22,8 @@ class RingParticle(Particle):
         value at the best position
 
     '''
-    def __init__(self, pso, left=None, right=None):
-        super().__init__(pso)
+    def __init__(self, pso,lower_bound, upper_bound, left=None, right=None):
+        super().__init__(pso,lower_bound=lower_bound,upper_bound=upper_bound)
         self.left = left
         self.right = right
 
