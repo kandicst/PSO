@@ -8,8 +8,8 @@ Implementing different topologies of a population based algorithm that finds the
 
 
 ## Requirements
-- Python 3.x
-- NumPy 
+- [Python 3.x](https://www.python.org/downloads/)
+- [NumPy](https://numpy.org/)
 
 ## How it works
 
