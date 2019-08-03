@@ -28,7 +28,7 @@ The idea is that by doing this, particles will efficiently search the input spac
 ## How to use it
 Let's say that we want to find the optimum of a Rosenbrock function
 
-<img src="https://www.researchgate.net/profile/Laurent_Baumes/publication/236625120/figure/fig4/AS:299275956310021@1448364356683/Plot-of-the-Rosenbrock-function-for-two-dimensions.png"/>
+<img src="https://math.aalto.fi/opetus/MatOhjelmistot/2018kevat/Heikki/Lecture4/html/minmax2dsolRosenbrock_01.png"/>
 
 ```python
 def rosenbrock(X):  
@@ -42,7 +42,7 @@ All we need to to is initialize desired PSO with this function ( we can obviousl
 ```python
 p = PSO(rosenbrock, num_dimensions=2, num_particles=100, max_iter=100)  
 position, value = p.optimize()  
-print('Optimum position: '+str(position) + '\nOptimum value: '+ str(value))
+print('Optimum position: ' + str(position) + '\nOptimum value: ' + str(value))
 ```
 Since PSO is a stochastic algorithm, the output will slightly vary between executions, but it should look something like this: 
 ```python
