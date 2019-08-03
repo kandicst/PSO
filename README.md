@@ -21,15 +21,16 @@ Afterwards, these particles are moved in relation to the position of the best pa
 
 The idea is that by doing this, particles will efficiently search the input space searching for the global optimum, where they will hopefully all gather in the end.
 
-```
+
 ![Alt Text](https://upload.wikimedia.org/wikipedia/commons/e/ec/ParticleSwarmArrowsAnimation.gif)
-```
+
 
 ## How to use it
 Let's say that we want to find the optimum of a Rosenbrock function
-```python
 
 <img src="https://www.researchgate.net/profile/Laurent_Baumes/publication/236625120/figure/fig4/AS:299275956310021@1448364356683/Plot-of-the-Rosenbrock-function-for-two-dimensions.png"/>
+
+```python
 def rosenbrock(X):  
     y = X[1]  
     a = 1. - x  
