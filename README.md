@@ -53,6 +53,5 @@ Optimum value: 4.6320456692446925e-16
 
 
 ## References
-- [Particle Swarm Optimization](https://en.wikipedia.org/wiki/Particle_swarm_optimization) on Wikipedia
 - [A Comparative Study for Neighbourhood Topologies](https://pdfs.semanticscholar.org/8c2b/95cec5adcb4c9d577d56f765b0d54175384c.pdf) 
 - [An Algorithmic Approach of Particle Swarm Optimization](https://pdfs.semanticscholar.org/11b4/3fdcf2decc96a7521c2c62084502a5b6cac0.pdf)
